@@ -13,8 +13,7 @@ Using Blender to Configure a Scene
 ----------------------------------
 
 The first step is to install the Pogona Blender add-on.
-For a download and instructions, head over to the add-on repository.
-**TODO**: Link!
+For instructions and a download, head over to the `add-on repository <https://github.com/tkn-tub/pogona-blender>`_.
 
 Adding Components
 ^^^^^^^^^^^^^^^^^

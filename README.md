@@ -15,6 +15,8 @@ If you use Pogona in your own work, we would appreciate a citation:
 
 ## Basic Usage
 
+Please also read the [full Pogona documentation](https://pogona.readthedocs.io/en/latest/).
+
 You will need at least Python 3.8 installed on your system.
 
 In the folder of this README, use pipenv to install all requirements:

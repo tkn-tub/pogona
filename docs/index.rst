@@ -25,7 +25,9 @@ If you use Pogona in your own work, we would appreciate a citation:
 Where to Get It
 ---------------
 
-**TODO** GitHub links to repos: Pogona, Cases, Blender add-on (and more example simulations?)
+* `Pogona on GitHub <https://github.com/tkn-tub/pogona>`_
+* `Pogona Blender add-on on GitHub <https://github.com/tkn-tub/pogona-blender>`_
+* `Pogona OpenFOAM cases on GitHub <https://github.com/tkn-tub/pogona/pogona-openfoam-cases>`_
 
 Contents
 --------
