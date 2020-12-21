@@ -1,0 +1,14 @@
+inherit:
+  - c.yaml  # values in c take precedence over a
+  - a.yaml
+global_x: 1337
+global_z: 2
+global_val_to_uninherit: hello
+replace_inherited_from_a: this-should-not-change
+replace_inherited_from_c: this-should-not-change
+components:
+  uninherit: [component_to_uninherit]
+  component_v:
+    value: 4
+  component_w:
+    name: Jane

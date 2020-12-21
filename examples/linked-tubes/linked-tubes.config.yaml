@@ -1,0 +1,62 @@
+inherit:
+  - linked-tubes.scene.yaml
+seed: 42
+sim_time_limit: 15
+base_delta_time: 0.005
+use_adaptive_time_stepping: True
+adaptive_time_max_error_threshold: 1e-7
+movement_predictor:
+  integration_method: RUNGE_KUTTA_FEHLBERG_45
+components:
+  destructor:
+    type: SensorDestructing
+  injector:
+    type: Injector
+    injection_amount: 5
+    attached_object: tube0
+  sensor:
+    type: SensorEmpirical
+    log_folder: sensor_data  # relative to `--results-dir`
+    use_known_sensor: ERLANGEN_20200310
+  tube0:
+    type: ObjectTube
+    radius: 0.00076  # in m
+    length: 0.09  # in m
+    flow_rate: 10  # in ml/min
+    mesh_resolution: 11  # radius cells in OpenFOAM mesh definition
+  tube1:
+    type: ObjectTube
+    radius: 0.00076  # in m
+    length: 0.09  # in m
+    flow_rate: 10  # in ml/min
+    mesh_resolution: 11  # radius cells in OpenFOAM mesh definition
+  modulation:
+    type: ModulationOOK
+    pause_duration: 1.5  # in s
+    attached_injector: injector
+    attached_pump: pump
+    # Inject new particles in every time step while active,
+    # rather than all at once:
+    use_burst: False
+  bitstream_generator:
+    type: BitstreamGenerator
+    start_time: 0  # in s
+    bit_sequence: "101001"
+    attached_modulation: modulation
+  pump:
+    type: ObjectPumpTimed
+    flow_rate: 10
+    injection_flow_mlpmin: 10  # Don't change flow rate on injection in this scenario.
+    pump_duration_s: 0.1
+  teleport_tube0_to_tube1:
+    type: SensorTeleporting
+    source_object: tube0
+    target_object: tube1
+    source_outlet_name: outlet
+    target_inlet_name: inlet
+  plotter_terminal:
+    type: PlotterTerminal
+  plotter_csv:
+    type: PlotterCSV
+    folder: particle_positions
+    write_interval: 1  # in number of time steps

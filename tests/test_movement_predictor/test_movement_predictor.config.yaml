@@ -1,0 +1,15 @@
+# No `inherit: [scene.yaml]` necessary.
+interpolation_method: MODIFIED_SHEPARD
+seed: 7357
+sim_time_limit: 0.319  # s, roughly matches last time step in the ParaView StreamTracer output CSV
+base_delta_time: 0.001  # s
+components:
+  cavity:
+    type: CavityObject
+    translation: [0, 0, 0]
+    rotation: [0, 0, 0]
+    scale: [1, 1, 1]
+  plotter_csv:
+    type: PlotterCSV
+    folder: molecule_positions
+    write_interval: 1

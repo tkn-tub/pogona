@@ -1,0 +1,19 @@
+# Expected result
+
+global_x: 1337  # from b.yaml, overrides c.yaml
+global_y: 'test'  # from a.yaml
+global_z: 3  # from override_conf, overrides b.yaml
+inherited_from_a: value-set-in-a
+inherited_from_c: value-set-in-c
+inherited_from_c_and_a: value-set-in-c  # c takes precedence
+replace_inherited_from_a: this-should-not-change
+replace_inherited_from_c: this-should-not-change
+components:
+  component_u:
+    name: u
+    new_value: 42
+  component_v:
+    value: 4
+    name: v
+  component_w:
+    name: Jane

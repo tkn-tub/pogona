@@ -1,0 +1,24 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pogona = {editable = true,path = "."}
+pdbpp = "*"
+sphinx = "*"
+autodocsumm = "*"
+gprof2dot = "*"
+pytest = "*"
+flake8 = "*"
+snakemake = "*"
+pygraphviz = "*"  # for Snakemake reports
+networkx = "*"  # for Snakemake reports
+sphinx-rtd-theme = "*"
+
+[packages]
+matplotlib = "*"
+seaborn = "*"
+
+[requires]
+# python_version = "3.8"

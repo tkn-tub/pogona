@@ -1,0 +1,10 @@
+[flake8]
+exclude =
+    .git,
+    __pycache__,
+    docs
+max-line-length = 79
+statistics = True
+# TODO: enable doctests?
+doctests = False
+

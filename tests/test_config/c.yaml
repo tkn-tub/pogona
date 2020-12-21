@@ -1,0 +1,4 @@
+global_x: 1338
+inherited_from_c: value-set-in-c
+inherited_from_c_and_a: value-set-in-c
+replace_inherited_from_c: value-set-in-c

@@ -1,0 +1,16 @@
+global_x: 42
+global_y: 'test'
+inherited_from_a: value-set-in-a
+inherited_from_c_and_a: value-set-in-a
+replace_inherited_from_a: value-set-in-a
+components:
+  component_u:
+    value: 'deleteme'
+    name: u
+  component_v:
+    value: 3
+    name: 'v'
+  component_to_uninherit:  # uninherit in b.yaml
+    name: Margaret
+  other_component_to_uninherit:  # uninherit in override
+    name: Susan
