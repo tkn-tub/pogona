@@ -31,7 +31,7 @@ exit
 ```
 
 Before you can run a simulation, be sure to have all CFD **simulation results** ready that are required by the particular simulation configuration.
-Please refer to our [OpenFOAM cases](https://github.com/tkn-tub/pogona/pogona-openfoam-cases) repository for details.
+Please refer to our [OpenFOAM cases](https://github.com/tkn-tub/pogona-openfoam-cases) repository for details.
 
 The second important requirement is the **simulation configuration** itself.
 Refer to the [Pogona documentation](https://pogona.readthedocs.io/en/latest/) on how to create your own configuration or use one of our example scenarios (coming soon).

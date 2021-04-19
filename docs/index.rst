@@ -27,7 +27,7 @@ Where to Get It
 
 * `Pogona on GitHub <https://github.com/tkn-tub/pogona>`_
 * `Pogona Blender add-on on GitHub <https://github.com/tkn-tub/pogona-blender>`_
-* `Pogona OpenFOAM cases on GitHub <https://github.com/tkn-tub/pogona/pogona-openfoam-cases>`_
+* `Pogona OpenFOAM cases on GitHub <https://github.com/tkn-tub/pogona-openfoam-cases>`_
 
 Contents
 --------
