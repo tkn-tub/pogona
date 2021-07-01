@@ -12,3 +12,4 @@ This guide will give you an overview of the steps needed to configure and run yo
     scene
     configuration
     running
+    visual_debugging

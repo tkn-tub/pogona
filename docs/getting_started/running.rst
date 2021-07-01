@@ -1,3 +1,5 @@
+.. _running:
+
 Running a Simulation
 ====================
 
@@ -28,6 +30,25 @@ This will also work while the simulation is still running, as the add-on will ch
 In order to better see the particles inside the opaque tubes, you can enable the X-Ray setting in the Viewport Shading panel.
 
 Next, we'll animate the Time Step.
+There are at least two approaches you can use:
+
+1. Animating the Time Step with a Driver
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Using `drivers <https://docs.blender.org/manual/en/latest/animation/drivers/usage.html>`_ is probably the easiest way to animate the Time Step.
+
+Enter ``#frame`` into the Time Step field to create a driver based on the index of the current frame.
+This will give you a 1-to-1 correspondence between frame number and simulation step.
+If you want to play back the simulation faster, you can right click on the Time Step field and select "Edit Driver".
+Here, you can edit the driver expression, for example, and multiply the frame number with a constant factor.
+For real-time playback, multiply by the formula below.
+
+2. Animating the Time Step with Key Frames
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This approach can give you more flexibility.
+For example, you can slow down the playback at the time when particles are first injected and then speed it up for the rest of the simulation.
+
 Add a key frame for the Time Step property both in the first and second frame.
 Then open a Graph Editor window and press N to open the right-hand side panel.
 Now, select the second key frame and, assuming we want real-time playback, set its value to :math:`\frac{1}{\text{base_delta_time}\;\cdot\;\text{frame_rate}}`.
