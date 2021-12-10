@@ -21,11 +21,11 @@ Optionally, hide this object in the Outliner window both for the viewport and fo
 
     Blender Screenshot: Instancing a sphere for each particle.
 
-Next, open a Geometry Workspace (click on the '+' in the tab bar at the very top).
+Next, open a Geometry Nodes Workspace (click on the '+' in the tab bar at the very top).
 In the middle of the workspace, click "New" to add a new Geometry Node graph.
-To instantiate your particle object at each of the visualization's particle positions, add a new Point Instance node, connect it to the Group Input and Output, and provide your particle object accordingly.
+To instantiate your particle object at each of the visualization's particle positions, add a new Instance on Points node, connect it to the Group Input and Output, and provide your particle object accordingly.
 Depending on the size of your original particle object, your particles may be too large or too small.
-Scale your particle object in edit mode to an appropriate size or add a Point Scale node before(!) the Point Instance node.
+Scale your particle object in edit mode to an appropriate size or adjust the scale in the Instance on Points node.
 
 Importing Particle Attributes
 -----------------------------
@@ -53,7 +53,14 @@ Visualizing Particle Attributes with Color
 
 Before we can use the ``object_id`` in a shader to control the color of each particle, we must first 'transfer' the attribute.
 This is because originally, the attribute is only assigned to the individual vertices at the original particle positions, but not automatically adopted to each instance when using the Point Instance node.
-To solve this, add an Attribute Transfer node, connect it after the Point Instance node, set its Source Geometry to any of the outputs from before the Point Instance node, set its Source attribute to ``object_id``, give the destination attribute a recognizable name (we'll use ``object_id`` here as well), and, for now, select the Domain "Point" and Mapping "Nearest".
+
+To solve this, the ``object_id`` attribute first has to be captured for use with Geometry Nodes.
+Add a Capture Attribute node, connect its Geometry input with the Geometry output of the Group Input node, set the Value field to Integer (because ``object_id`` is Integer-valued), and connect its Value socket to the empty circle of the Group Input node.
+At this point, you can go into the Modifiers tab, click the Input Attribute Toggle button next to your newly added input and enter ``object_id``.
+After instancing the spheres on the original particle positions, the instances have to be merged into a new mesh by using a Realize Instances node after the Instance on Points node.
+Now, add a Transfer Attribute node, connect the Target input to any Geometry output before the Instance on Points node, choose ``Integer``, ``Nearest``, and ``Point`` to adopt the ``object_id`` integer at the nearest vertices of the instanced mesh.
+Connect the Attribute input of the Transfer Attribute node to the corresponding output of the Capture Attribute node, use a new Position node for the Position socket, and connect the output Attribute to a new socket on the Group Output node.
+Finally, go back to the Modifiers tab and also enter ``object_id`` into the field for your output attribute.
 
 .. figure:: ../img/getting-started_vis-debug_blender_attr-transfer.png
 
@@ -67,7 +74,7 @@ Begin by adding some lights and giving the tubes in the example scenario some tr
     Blender Screenshot: Tubes shown at their interconnection point with transparent Principled BSDF materials.
     There is not material applied to the particles themselves yet.
 
-Finally, select your single particle (not the Pogona Molecules Visualization with the instanced praticles) and give it a new material.
+Finally, select your single particle (not the Pogona Molecules Visualization with the instanced particles) and give it a new material.
 Add a new Attribute node, set its Type to Geometry and its Name to ``object_id``.
 As a precaution for at some point having more than 2 objects, add a MapRange node and change its From Max value to the number of possible objects minus 1.
 Then connect its input to the Attribute's Fac output (since ``object_id`` is 1-dimensional) and route its output through a ColorRamp into the Base Color input of the Principled BSDF node (and optionally into the Emission input).
