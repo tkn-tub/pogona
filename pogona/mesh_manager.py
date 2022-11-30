@@ -60,6 +60,7 @@ class MeshManager(pg.Component):
     ):
         super().initialize(simulation_kernel, init_stage)
         if init_stage == pg.InitStages.CHECK_ARGUMENTS:
+            LOG.debug(f"{self.openfoam_cases_path=}")
             if 'cache_path' not in self._arguments_already_set:
                 self.cache_path = os.path.join(
                     self.openfoam_cases_path,
@@ -136,6 +137,8 @@ class MeshManager(pg.Component):
         :return: The cached vector field, if it exists. Otherwise the
             vector field will be loaded from the given path.
         """
+        if openfoam_sim_path == "":
+            raise ValueError("openfoam_sim_path must not be empty")
         if mesh_index is not None:
             mesh_string = self.get_valid_filename(mesh_index)
         else:
@@ -198,7 +201,7 @@ class MeshManager(pg.Component):
         if not os.path.isdir(import_folder):
             LOG.critical(
                 "The openfoam simulation result folder "
-                f"{os.path.realpath(import_folder)} does not exist. "
+                f"\"{import_folder}\" is not a directory. "
                 "Are you sure you ran the openfoam simulation and put the "
                 "result in the correct directory?"
             )

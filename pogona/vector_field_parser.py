@@ -60,7 +60,7 @@ class VectorFieldParser:
         if not os.path.isdir(folder):
             raise NotADirectoryError(
                 "The OpenFOAM simulation result folder "
-                f"{os.path.realpath(folder)} does not exist. "
+                f"\"{folder}\" does not exist. "
                 "Are you sure your path configuration is correct?"
             )
         # Check if cell center file exists

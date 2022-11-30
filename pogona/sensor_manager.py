@@ -85,6 +85,12 @@ class SensorManager(pg.Component):
                 fallback_mesh_index = obj.get_fallback_mesh_index()
                 if not obj.is_active and fallback_mesh_index is not None:
                     # Try to temporarily load a fallback mesh, if it exists.
+                    LOG.debug(
+                        "Ensure that a mesh exists even if object is "
+                        "inactive by loading a fallback mesh for "
+                        f"object \"{obj.component_name}\". "
+                        f"{fallback_mesh_index=}"
+                    )
                     vector_field = (
                         simulation_kernel.get_mesh_manager().load_vector_field(
                             openfoam_sim_path=obj.get_path(fallback=True),

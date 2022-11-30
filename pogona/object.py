@@ -278,7 +278,7 @@ class Object(pg.Component, metaclass=ABCMeta):
         :param use_latest_time_step: Find the latest time step in path
         :return: Path to the OpenFOAM files for this object.
         """
-        if not self._is_active:
+        if not self._is_active and not fallback:
             return ''
         mesh_index = (
             self.get_mesh_index() if not fallback
