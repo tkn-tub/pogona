@@ -1,0 +1,150 @@
+# Manually defined configuration.
+# WARNING: making changes to this file will affect all child configurations!
+
+inherit:
+  - y-piece_0.76mm_40cm_sensor-bartington.scene.yaml
+interpolation_method: MODIFIED_SHEPARD
+seed: 1337
+sim_time_limit: 36
+base_delta_time: 0.005
+use_adaptive_time_stepping: True
+adaptive_time_max_error_threshold: 1e-7
+sensor_manager:
+  default_use_sensor_subscriptions: True
+  use_range_queries: True
+movement_predictor:
+  integration_method: RUNGE_KUTTA_FEHLBERG_45
+components:
+  bitstream_generator:
+    type: BitstreamGenerator
+    attached_modulation: modulation
+    bit_sequence: "1"
+    start_time: 0
+  injection_destructor:
+    type: SensorDestructing
+  pump:
+    type: ObjectPumpVolume
+    injection_flow_mlpmin: 5  # ml/min
+    injection_volume_l: 1.73e-5  # original injection_duration: 0.1038 s, inlet_flow: 10 ml/min -> 0.1038 s * 10 ml/min
+  injector:
+    type: Injector
+    injection_amount: 200  # normally 5000
+    attached_object: injection_tube
+  modulation:
+    type: ModulationOOK
+    attached_pump: pump
+    attached_injector: injector
+    attached_destructor: injection_destructor
+    pause_duration: 18.5
+    use_burst: True
+  destructor:
+    type: SensorDestructing
+  sensor_empirical_5cm:
+    type: SensorEmpirical
+    log_folder: sensor_data
+  sensor_empirical_10cm:
+    type: SensorEmpirical
+    log_folder: sensor_data
+  sensor_empirical_20cm:
+    type: SensorEmpirical
+    log_folder: sensor_data
+  sensor_empirical_30cm:
+    type: SensorEmpirical
+    log_folder: sensor_data
+  sensor_empirical_40cm:
+    type: SensorEmpirical
+    log_folder: sensor_data
+  tube0:
+    type: ObjectTube
+    radius: 0.00076
+    length: 0.09
+    flow_rate: 5  # initial ml/min
+    mesh_resolution: 11  # radius cells in OpenFOAM mesh definition
+  tube1:
+    type: ObjectTube
+    radius: 0.00076
+    length: 0.09
+    flow_rate: 5  # initial ml/min
+    mesh_resolution: 11  # radius cells in OpenFOAM mesh definition
+  tube2:
+    type: ObjectTube
+    radius: 0.00076
+    length: 0.09
+    flow_rate: 5  # initial ml/min
+    mesh_resolution: 11  # radius cells in OpenFOAM mesh definition
+  tube3:
+    type: ObjectTube
+    radius: 0.00076
+    length: 0.09
+    flow_rate: 5  # initial ml/min
+    mesh_resolution: 11  # radius cells in OpenFOAM mesh definition
+  tube4:
+    type: ObjectTube
+    radius: 0.00076
+    length: 0.09
+    flow_rate: 5  # initial ml/min
+    mesh_resolution: 11  # radius cells in OpenFOAM mesh definition
+  injection_tube:
+    type: ObjectTube
+    radius: 0.00076
+    length: 0.09
+    flow_rate: 0  # initial ml/min
+    mesh_resolution: 11  # radius cells in OpenFOAM mesh definition
+  ypiece:
+    type: ObjectYPiece
+    # Angle of the y split within the mesh (not concerning object rotation):
+    angle: 30
+    radius: 0.00076
+    outlet_length: 0.05  # m
+    injection_inlet_length: 0.05  # m
+    background_inlet_length: 0.01  # m
+    flow_rate_background: 5.0  # ml/min
+    flow_rate_injection: 0  # initial ml/min
+  plotter_terminal:
+    type: PlotterTerminal
+  plotter_csv:
+    type: PlotterCSV
+    folder: molecule_positions
+    write_interval: 1
+  teleport_ypiece_to_tube0:
+    type: SensorTeleporting
+    source_object: ypiece
+    target_object: tube0
+    source_outlet_name: outlet
+    target_inlet_name: inlet
+  teleport_tube0_to_tube1:
+    type: SensorTeleporting
+    source_object: tube0
+    target_object: tube1
+    source_outlet_name: outlet
+    target_inlet_name: inlet
+  teleport_tube1_to_tube2:
+    type: SensorTeleporting
+    source_object: tube1
+    target_object: tube2
+    source_outlet_name: outlet
+    target_inlet_name: inlet
+  teleport_tube2_to_tube3:
+    type: SensorTeleporting
+    source_object: tube2
+    target_object: tube3
+    source_outlet_name: outlet
+    target_inlet_name: inlet
+  teleport_tube3_to_tube4:
+    type: SensorTeleporting
+    source_object: tube3
+    target_object: tube4
+    source_outlet_name: outlet
+    target_inlet_name: inlet
+  teleport_injector_to_ypiece:
+    type: SensorTeleporting
+    source_object: injection_tube
+    target_object: ypiece
+    source_outlet_name: outlet
+    target_inlet_name: injection
+  teleport_pump_to_injector:
+    type: SensorTeleporting
+    source_object: pump
+    target_object: injection_tube
+    source_outlet_name: outlet
+    target_inlet_name: inlet
